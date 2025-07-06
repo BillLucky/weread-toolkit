@@ -33,12 +33,28 @@ function runFullScreen() {
         readerControlsLeft = readerControls.style.left;
         readerControls.style.left = 'unset';
         readerControls.style.right = '1%';
+
+        // 添加双页模式
+        let contentContainer = document.querySelector('div.wr_canvasContainer');
+        if (contentContainer) {
+            contentContainer.style.columnCount = '2';
+            contentContainer.style.columnGap = '20px';
+            contentContainer.style.padding = '0 5%';
+        }
     } else {
         readerTopBar.style.maxWidth = readerTopBarMaxWidth;
         appContent.style.maxWidth = appContentMaxWidth;
 
         readerControls.style.left = readerControlsLeft;
         readerControls.style.right = 'unset';
+
+        // 恢复单页模式
+        let contentContainer = document.querySelector('div.wr_canvasContainer');
+        if (contentContainer) {
+            contentContainer.style.columnCount = '1';
+            contentContainer.style.columnGap = '0';
+            contentContainer.style.padding = '0';
+        }
     }
 
     // 主动触发 resize 事件，让 app_content 下的 wr_canvasContainer（canvas）进行重绘
